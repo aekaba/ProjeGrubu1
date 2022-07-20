@@ -68,3 +68,8 @@ print("---'Hindi' Dilinde çekilmiş olan filmlerin ortalama 'runtime' suresi ne
 hindiData = data[data['Language'] == 'Hindi']
 hindiAvg = hindiData['Runtime'].mean()
 print(hindiAvg)
+
+# Veri setinde bulunan filmlerde en çok kullanılan 3 dili bulunuz.
+
+calculate_language=data.groupby('Language').size().sort_values(ascending=False)
+print("En çok kullanılan 3 dil "+str(+calculate_language[:3]))
