@@ -73,3 +73,61 @@ print(hindiAvg)
 
 calculate_language=data.groupby('Language').size().sort_values(ascending=False)
 print("En çok kullanılan 3 dil "+str(+calculate_language[:3]))
+
+# Proje 2, Task 2: Veri setinde outliar var mı ?
+
+print("---Veri setinde outliar var mı ?---")
+
+dataframe=pd.read_csv("NetflixOriginals.csv",encoding='ISO-8859-1')
+
+def grab_col_names(dataframe, cat_th=10, car_th=20):
+    # cat_cols, cat_but_car
+    cat_cols = [col for col in dataframe.columns if dataframe[col].dtypes == "O"]
+    num_but_cat = [
+        col
+        for col in dataframe.columns
+        if dataframe[col].nunique() < cat_th and dataframe[col].dtypes != "O"
+    ]
+    cat_but_car = [
+        col
+        for col in dataframe.columns
+        if dataframe[col].nunique() > car_th and dataframe[col].dtypes == "O"
+    ]
+    cat_cols = cat_cols + num_but_cat
+    cat_cols = [col for col in cat_cols if col not in cat_but_car]
+
+    # num_cols
+    num_cols = [col for col in dataframe.columns if dataframe[col].dtypes != "O"]
+    num_cols = [col for col in num_cols if col not in num_but_cat]
+
+    return cat_cols, num_cols, cat_but_car
+
+
+cat_cols, num_cols, cat_but_car = grab_col_names(dataframe, cat_th=5, car_th=20)
+
+
+def outlier_thresholds(dataframe, col_name, q1=0.25, q3=0.75):
+    quartile1 = dataframe[col_name].quantile(q1)
+    quartile3 = dataframe[col_name].quantile(q3)
+    interquantile_range = quartile3 - quartile1
+    up_limit = quartile3 + 1.5 * interquantile_range
+    low_limit = quartile1 - 1.5 * interquantile_range
+    return low_limit, up_limit
+
+
+def check_outlier(dataframe, col_name, q1=0.25, q3=0.75):
+    low_limit, up_limit = outlier_thresholds(dataframe, col_name, q1, q3)
+    if dataframe[
+        (dataframe[col_name] > up_limit) | (dataframe[col_name] < low_limit)
+    ].any(axis=None):
+        return True
+    else:
+        return False
+
+
+for col in num_cols:
+    print(col, check_outlier(dataframe, col, 0.1, 0.9))
+
+print(
+    "Sonuç: Veri setinde belirlenen uç değerlerle aykırı değer analizi yapan fonksiyonların çıktıları sonucunda herhangi bir aykırı değer gözlemlenmemiştir."
+)
