@@ -51,3 +51,20 @@ plt.show()
 print("---Her bir dilin en fazla kullanıldığı Genre nedir?---")
 result = data.groupby(["Language"])["Genre"].value_counts(sort=True).groupby(level=0)
 print(result.head(1))
+
+# İngilizce çekilen filmler içerisinde hangi tür en yüksek IMDB puanına sahiptir?
+
+print("---İngilizce çekilen filmler içerisinde hangi tür en yüksek IMDB puanına sahiptir?---")
+
+engData = data[data['Language'] == 'English']
+engData=engData.groupby('Genre')['IMDB Score'].mean().sort_values(ascending=False).reset_index()
+
+print(engData.head(1))
+
+# 'Hindi' Dilinde çekilmiş olan filmlerin ortalama 'runtime' suresi nedir?
+
+print("---'Hindi' Dilinde çekilmiş olan filmlerin ortalama 'runtime' suresi nedir?---")
+
+hindiData = data[data['Language'] == 'Hindi']
+hindiAvg = hindiData['Runtime'].mean()
+print(hindiAvg)
