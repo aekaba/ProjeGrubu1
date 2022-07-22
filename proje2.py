@@ -171,3 +171,21 @@ fig = px.scatter(data_frame=data, x="IMDB Score", y="Runtime")
 fig.update_layout(autosize=False, width=800, height=600,)
 
 fig.show()
+
+#'Runtime' değeri en yüksek olan ilk 10 film hangileridir? Görselleştiriniz.
+
+mostRuntimeFilm=data.sort_values("Runtime",ascending=False)
+mostRuntimeFilm=mostRuntimeFilm.head(10)
+
+sns.barplot(x=mostRuntimeFilm.Title, y='Runtime', data=mostRuntimeFilm)
+plt.gcf().autofmt_xdate()
+plt.show()
+
+#IMDB Puanı en yüksek olan ilk 10 'Genre' hangileridir? Görselleştiriniz.
+
+mostGenre=data.sort_values("IMDB Score",ascending=False)
+mostGenre=mostGenre.head(10)
+
+sns.barplot(x=mostRuntimeFilm.Genre, y='IMDB Score', data=mostRuntimeFilm)
+plt.gcf().autofmt_xdate()
+plt.show()
