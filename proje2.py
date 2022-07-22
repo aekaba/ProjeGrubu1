@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+import plotly.express as px
 
 data = pd.read_csv("NetflixOriginals.csv",encoding='ISO-8859-1')
 
@@ -145,3 +146,28 @@ print(result.head(10))
 veri = data[data['Runtime'] >=40]
 sns.barplot(x=veri.Language.index, y='Language', data=veri)
 plt.show()
+
+#'Genre' Sütunu kaç kategoriye sahiptir ve bu kategoriler nelerdir? Görselleştirerek ifade ediniz.
+
+print("---'Genre' Sütunu kaç kategoriye sahiptir ve bu kategoriler nelerdir? Görselleştirerek ifade ediniz.---")
+
+genre_len = data.Genre.nunique()
+calculate_genre = data.Genre.value_counts()
+fig = px.bar(data_frame=calculate_genre, x=calculate_genre.index, y=calculate_genre.values, labels={"y":"Genre Movies Number", "index":"Genres"})
+
+print(calculate_genre)
+fig.show()
+
+#IMDB puanı ile 'Runtime' arasında nasıl bir korelasyon vardır? İnceleyip görselleştiriniz.
+
+print("---IMDB puanı ile 'Runtime' arasında nasıl bir korelasyon vardır? İnceleyip görselleştiriniz.---")
+
+correlation=data["Runtime"].corr(data["IMDB Score"])
+correlation1=data[["IMDB Score", "Runtime"]].corr()
+correlation2=data[["Runtime", "IMDB Score"]].corr()
+
+
+fig = px.scatter(data_frame=data, x="IMDB Score", y="Runtime")
+fig.update_layout(autosize=False, width=800, height=600,)
+
+fig.show()
