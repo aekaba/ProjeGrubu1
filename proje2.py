@@ -131,3 +131,10 @@ for col in num_cols:
 print(
     "Sonuç: Veri setinde belirlenen uç değerlerle aykırı değer analizi yapan fonksiyonların çıktıları sonucunda herhangi bir aykırı değer gözlemlenmemiştir."
 )
+
+#IMDB puanı en yüksek olan ilk 10 film hangileridir?
+
+print("---IMDB puanı en yüksek olan ilk 10 film hangileridir?---")
+
+result=data.sort_values("IMDB Score",ascending=False)
+print(result.head(10))
