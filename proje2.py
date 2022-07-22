@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 data = pd.read_csv("NetflixOriginals.csv",encoding='ISO-8859-1')
 
@@ -138,3 +139,9 @@ print("---IMDB puanı en yüksek olan ilk 10 film hangileridir?---")
 
 result=data.sort_values("IMDB Score",ascending=False)
 print(result.head(10))
+
+#Uzunmetraj olan filmler
+
+veri = data[data['Runtime'] >=40]
+sns.barplot(x=veri.Language.index, y='Language', data=veri)
+plt.show()

@@ -7,7 +7,7 @@ Projelerde emeği geçenler
 
 - [Ata Emir Kaba](https://github.com/aekaba)
 - [İlteber Uluç Döver](https://github.com/reisgoldmanX)
-- [Elif Edanur Sesli]()
+- [Elif Edanur Sesli](https://github.com/EdanurSesli)
 - [Hava Helin Haydaroğlu]()
 - [Muhammet Arslan]()
 - [Levent Toz]()
