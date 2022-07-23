@@ -189,3 +189,45 @@ mostGenre=mostGenre.head(10)
 sns.barplot(x=mostRuntimeFilm.Genre, y='IMDB Score', data=mostRuntimeFilm)
 plt.gcf().autofmt_xdate()
 plt.show()
+
+#2019 Ocak ile 2020 Haziran tarihleri arasında 'Documentary' türünde çekilmiş filmlerin IMDB değerleri
+
+print("---2019 Ocak ile 2020 Haziran tarihleri arasında 'Documentary' türünde çekilmiş filmlerin IMDB değerleri---")
+
+df = pd.read_csv(
+    "NetflixOriginals.csv",
+    encoding="ISO-8859-1",
+)
+df["Date"] = pd.to_datetime(df.Premiere)
+
+df.loc[
+    (df["Genre"] == "Documentary")
+    & (df["Date"] > "2019-01-31")
+    & (df["Date"] < "2020-06-01")
+].head()
+
+docum = df.loc[
+    (df["Genre"] == "Documentary")
+    & (df["Date"] > "2019-01-31")
+    & (df["Date"] < "2020-06-01")
+].head()
+docum["Title"].value_counts()
+
+
+print(
+    df.loc[
+        (df["Genre"] == "Documentary")
+        & (df["Date"] > "2019-01-31")
+        & (df["Date"] < "2020-06-01")
+    ].head()
+)
+
+fig = px.bar(
+    data_frame=docum,
+    x=docum.Title,
+    y=docum["IMDB Score"],
+    labels={"y": "IMDB Score", "index": "Titles"},
+)
+fig.update_layout(xaxis={"categoryorder": "total descending"})
+
+fig.show()

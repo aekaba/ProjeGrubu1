@@ -8,9 +8,9 @@ Projelerde emeği geçenler
 - [Ata Emir Kaba](https://github.com/aekaba)
 - [İlteber Uluç Döver](https://github.com/reisgoldmanX)
 - [Elif Edanur Sesli](https://github.com/EdanurSesli)
-- [Hava Helin Haydaroğlu]()
-- [Muhammet Arslan]()
-- [Levent Toz]()
+- [Hava Helin Haydaroğlu](https://github.com/havahelinhaydaroglu)
+- [Muhammet Arslan](https://github.com/arslanmuhammet)
+- [Levent Toz](https://github.com/leventtoz61)
 
 1. Proje: Not Takip Sistemi
 
